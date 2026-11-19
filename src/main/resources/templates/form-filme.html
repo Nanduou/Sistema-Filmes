@@ -1,7 +1,122 @@
-<!DOCTYPE html><html lang="pt-BR" xmlns:th="http://www.thymeleaf.org"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Filme - CineManager</title><link rel="stylesheet" th:href="@{/css/estilo.css}"></head><body><div class="container"><nav class="navbar"><a class="brand" th:href="@{/}">CineManager</a><a th:href="@{/filmes}">Filmes</a><a th:href="@{/categorias}">Categorias</a><a th:href="@{/diretores}">Diretores</a><a th:href="@{/produtoras}">Produtoras</a><a class="nav-dashboard" th:href="@{/}">Painel</a></nav><main><div class="page-heading"><div><h1 th:text="${filme.id == null ? 'Novo filme' : 'Editar filme'}">Filme</h1><p>Preencha as informações abaixo.</p></div></div><section class="panel form-panel"><form th:action="@{/filmes/salvar}" th:object="${filme}" method="post"><input type="hidden" th:field="*{id}"><div class="form-grid">
-<div class="field full"><label for="titulo">Título do filme</label><input id="titulo" type="text" th:field="*{titulo}" placeholder="Digite o título" required></div>
-<div class="field"><label for="ano">Ano de lançamento</label><input id="ano" type="number" th:field="*{ano}" min="1" required></div>
-<div class="field"><label for="nota">Nota (0 a 10)</label><input id="nota" type="number" th:field="*{nota}" min="0" max="10" step="0.1" required></div>
-<div class="field"><label for="produtora">Produtora</label><select id="produtora" th:field="*{produtora.id}" required><option value="">Selecione uma produtora</option><option th:each="item : ${produtoras}" th:value="${item.id}" th:text="${item.nome}"></option></select></div>
-<div class="field"><label for="diretor">Diretor</label><select id="diretor" th:field="*{diretor.id}" required><option value="">Selecione um diretor</option><option th:each="item : ${diretores}" th:value="${item.id}" th:text="${item.nome}"></option></select></div>
-<div class="field full"><label for="categoria">Categoria</label><select id="categoria" th:field="*{categoria.id}" required><option value="">Selecione uma categoria</option><option th:each="item : ${categorias}" th:value="${item.id}" th:text="${item.nome}"></option></select></div></div><div class="form-actions"><button class="btn btn-primary" type="submit">Salvar</button><a class="btn btn-light" th:href="@{/filmes}">Cancelar</a></div></form></section></main></div></body></html>
+
+<!DOCTYPE html>
+<html lang="pt-BR" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Filme - CineManager</title>
+    <link rel="stylesheet" th:href="@{/css/estilo.css}">
+</head>
+
+<body>
+    <div class="container">
+
+        <nav class="navbar">
+            <a class="brand" th:href="@{/}">CineManager</a>
+            <a th:href="@{/filmes}">Filmes</a>
+            <a th:href="@{/categorias}">Categorias</a>
+            <a th:href="@{/diretores}">Diretores</a>
+            <a th:href="@{/produtoras}">Produtoras</a>
+        </nav>
+
+        <main>
+            <div class="page-heading">
+                <div>
+                    <h1 th:text="${filme.id == null ? 'Novo filme' : 'Editar filme'}">
+                        Filme
+                    </h1>
+                    <p>Preencha as informações abaixo.</p>
+                </div>
+            </div>
+
+            <section class="panel form-panel">
+                <form th:action="@{/filmes/salvar}" th:object="${filme}" method="post">
+
+                    <input type="hidden" th:field="*{id}">
+
+                    <div class="form-grid">
+
+                        <div class="field full">
+                            <label for="titulo">Título do filme</label>
+                            <input
+                                id="titulo"
+                                type="text"
+                                th:field="*{titulo}"
+                                placeholder="Digite o título"
+                                required>
+                        </div>
+
+                        <div class="field">
+                            <label for="ano">Ano de lançamento</label>
+                            <input
+                                id="ano"
+                                type="number"
+                                th:field="*{ano}"
+                                min="1"
+                                required>
+                        </div>
+
+                        <div class="field">
+                            <label for="nota">Nota (0 a 10)</label>
+                            <input
+                                id="nota"
+                                type="number"
+                                th:field="*{nota}"
+                                min="0"
+                                max="10"
+                                step="0.1"
+                                required>
+                        </div>
+
+                        <div class="field">
+                            <label for="produtora">Produtora</label>
+                            <select id="produtora" th:field="*{produtora.id}" required>
+                                <option value="">Selecione uma produtora</option>
+                                <option
+                                    th:each="item : ${produtoras}"
+                                    th:value="${item.id}"
+                                    th:text="${item.nome}">
+                                </option>
+                            </select>
+                        </div>
+
+                        <div class="field">
+                            <label for="diretor">Diretor</label>
+                            <select id="diretor" th:field="*{diretor.id}" required>
+                                <option value="">Selecione um diretor</option>
+                                <option
+                                    th:each="item : ${diretores}"
+                                    th:value="${item.id}"
+                                    th:text="${item.nome}">
+                                </option>
+                            </select>
+                        </div>
+
+                        <div class="field full">
+                            <label for="categoria">Categoria</label>
+                            <select id="categoria" th:field="*{categoria.id}" required>
+                                <option value="">Selecione uma categoria</option>
+                                <option
+                                    th:each="item : ${categorias}"
+                                    th:value="${item.id}"
+                                    th:text="${item.nome}">
+                                </option>
+                            </select>
+                        </div>
+
+                    </div>
+
+                    <div class="form-actions">
+                        <button class="btn btn-primary" type="submit">Salvar</button>
+                        <a class="btn btn-light" th:href="@{/filmes}">Cancelar</a>
+                    </div>
+
+                </form>
+            </section>
+        </main>
+
+    </div>
+</body>
+
+</html>
