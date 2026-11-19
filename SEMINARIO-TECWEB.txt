@@ -1,0 +1,31 @@
+SISTEMA DE FILMES - SEMINÁRIO TECWEB
+
+O projeto foi mantido em Java 21, Spring Boot, Spring Data JPA, Thymeleaf e H2.
+
+Funcionalidades existentes mantidas:
+- Cadastro, edição e exclusão de filmes.
+- Cadastro, edição e exclusão de categorias.
+- Cadastro, edição e exclusão de diretores.
+- Cadastro, edição e exclusão de produtoras.
+- Relacionamentos entre Filme e Categoria, Diretor e Produtora por chaves estrangeiras.
+
+Melhorias incluídas:
+- Tela inicial com links para as áreas do sistema.
+- Painel com quantidade de filmes, categorias, diretores e produtoras.
+- Cálculo automático da média das notas cadastradas.
+- Classificação automática do filme conforme a nota:
+  8,0 a 10,0: Destaque
+  6,0 a 7,9: Bom
+  4,0 a 5,9: Regular
+  abaixo de 4,0: Baixa avaliação
+- Busca por título, diretor, categoria ou produtora.
+- Confirmação antes de excluir um filme.
+
+Para demonstrar:
+1. Inicie a aplicação pelo FilmesApplication.
+2. Abra http://localhost:8080.
+3. Cadastre uma categoria, um diretor e uma produtora.
+4. Cadastre filmes selecionando os três relacionamentos e informando uma nota de 0 a 10.
+5. Consulte a classificação automática, a média no painel e teste a busca.
+
+Observação: o projeto continua usando H2 em memória, como no código enviado. Os dados são reiniciados quando a aplicação é encerrada.

@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="pt-BR" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Produtoras - CineManager</title>
+    <link rel="stylesheet" th:href="@{/css/estilo.css}">
+</head>
+<body>
+<div class="container">
+
+<nav class="navbar">
+    <a class="brand" th:href="@{/}">CineManager</a>
+    <a th:href="@{/filmes}">Filmes</a>
+    <a th:href="@{/categorias}">Categorias</a>
+    <a th:href="@{/diretores}">Diretores</a>
+    <a th:href="@{/produtoras}">Produtoras</a>
+    <a th:href="@{/}" class="nav-dashboard">Painel</a>
+</nav>
+<main>
+    <div class="page-heading"><div><h1>Produtoras</h1><p>Consulte e gerencie as produtoras cadastradas.</p></div><a class="btn btn-primary" th:href="@{/produtoras/nova}">Nova produtora</a></div>
+    <section class="panel list-panel"><div class="table-wrap"><table>
+        <thead><tr><th>ID</th><th>Nome</th><th>Ações</th></tr></thead>
+        <tbody>
+            <tr th:each="item : ${produtoras}"><td th:text="${item.id}"></td><td class="main-cell" th:text="${item.nome}"></td>
+                <td class="actions"><a class="btn btn-edit" th:href="@{/produtoras/editar/{id}(id=${item.id})}">Editar</a><a class="btn btn-delete" th:href="@{/produtoras/excluir/{id}(id=${item.id})}" onclick="return confirm('Deseja excluir este registro?')">Excluir</a></td></tr>
+            <tr th:if="${#lists.isEmpty(produtoras)}"><td colspan="3" class="empty">Nenhum registro cadastrado.</td></tr>
+        </tbody>
+    </table></div></section>
+</main>
+</div>
+</body>
+</html>

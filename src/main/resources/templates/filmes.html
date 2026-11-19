@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="pt-BR" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Filmes - CineManager</title>
+    <link rel="stylesheet" th:href="@{/css/estilo.css}">
+</head>
+<body>
+<div class="container">
+
+<nav class="navbar">
+    <a class="brand" th:href="@{/}">CineManager</a>
+    <a th:href="@{/filmes}">Filmes</a>
+    <a th:href="@{/categorias}">Categorias</a>
+    <a th:href="@{/diretores}">Diretores</a>
+    <a th:href="@{/produtoras}">Produtoras</a>
+    <a th:href="@{/}" class="nav-dashboard">Painel</a>
+</nav>
+<main>
+    <div class="page-heading"><div><h1>Filmes</h1><p>Consulte e organize os filmes cadastrados.</p></div><a class="btn btn-primary" th:href="@{/filmes/novo}">Novo filme</a></div>
+    <section class="panel list-panel">
+        <form class="search-form" th:action="@{/filmes}" method="get">
+            <input type="text" name="busca" th:value="${busca}" placeholder="Buscar por título, diretor, categoria ou produtora">
+            <button class="btn btn-primary" type="submit">Buscar</button><a class="btn btn-light" th:href="@{/filmes}">Limpar</a>
+        </form>
+        <div class="table-wrap"><table>
+            <thead><tr><th>ID</th><th>Título</th><th>Ano</th><th>Produtora</th><th>Diretor</th><th>Categoria</th><th>Nota</th><th>Avaliação</th><th>Ações</th></tr></thead>
+            <tbody>
+                <tr th:each="filme : ${filmes}">
+                    <td th:text="${filme.id}"></td><td class="main-cell" th:text="${filme.titulo}"></td><td th:text="${filme.ano}"></td>
+                    <td th:text="${filme.produtora.nome}"></td><td th:text="${filme.diretor.nome}"></td><td th:text="${filme.categoria.nome}"></td>
+                    <td th:text="${filme.nota}"></td><td><span class="status" th:text="${filme.classificacao}" th:classappend="${filme.nota != null and filme.nota >= 8 ? ' status-good' : (filme.nota != null and filme.nota < 4 ? ' status-low' : '')}"></span></td>
+                    <td class="actions"><a class="btn btn-edit" th:href="@{/filmes/editar/{id}(id=${filme.id})}">Editar</a><a class="btn btn-delete" th:href="@{/filmes/excluir/{id}(id=${filme.id})}" onclick="return confirm('Deseja excluir este filme?')">Excluir</a></td>
+                </tr>
+                <tr th:if="${#lists.isEmpty(filmes)}"><td colspan="9" class="empty">Nenhum filme encontrado.</td></tr>
+            </tbody>
+        </table></div>
+    </section>
+</main>
+</div>
+</body>
+</html>
